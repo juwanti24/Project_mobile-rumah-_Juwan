@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import com.bumptech.glide.Glide
 import com.example.project_juwan.databinding.ItemDokterBinding
 
 class DokterAdapter(
@@ -23,9 +24,14 @@ class DokterAdapter(
 
         val dokter = data[position]
         binding.tvNama.text = dokter.nama
-        binding.imgDokter.setImageResource(dokter.foto)   // baris baru
         binding.tvSpesialis.text = "Spesialis ${dokter.spesialis}"
         binding.tvRating.text = "★ ${dokter.rating}/5"
+
+        Glide.with(context)
+            .load(dokter.foto)
+            .override(200, 200)
+            .centerCrop()
+            .into(binding.imgDokter)
 
         if (dokter.tersedia) {
             binding.tvStatus.text = "● Tersedia"
