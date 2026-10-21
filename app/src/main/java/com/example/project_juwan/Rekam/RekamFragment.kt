@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.example.project_juwan.DetailActivity
 import com.example.project_juwan.R
@@ -16,7 +17,7 @@ class RekamFragment : Fragment() {
 
     // Data dummy
     private val daftarRekam = listOf(
-        RekamMedis("10 Agustus 2026", "Pemeriksaan rutin", "Dr. tirta goat", "Spesialis Umum", "Tekanan darah normal", R.drawable.ic_chat),
+        RekamMedis("10 Agustus 2026", "Pemeriksaan rutin", "Dr. Andi Pratama", "Spesialis Umum", "Tekanan darah normal", R.drawable.ic_chat),
         RekamMedis("11 Agustus 2026", "Pemeriksaan gigi", "Dr. Budi Santoso", "Spesialis Gigi", "Gigi berkarang", R.drawable.ic_chat),
         RekamMedis("11 Agustus 2026", "Hasil laboratorium", "Dr. Andi Pratama", "Spesialis Umum", "Hasil tes darah", R.drawable.ic_description),
         RekamMedis("12 Agustus 2026", "Resep obat", "Dr. Siti Rahma", "Spesialis Anak", "Vitamin dan obat pereda demam", R.drawable.ic_description)
@@ -34,7 +35,16 @@ class RekamFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvJumlah.text = "${daftarRekam.size} catatan medis"
-        binding.listRekam.adapter = RekamAdapter(requireContext(), daftarRekam)
+
+        // Ubah data jadi teks per baris untuk simple list item
+        val teksList = daftarRekam.map { "${it.tanggal}\n${it.judul} - ${it.dokter}" }
+
+        // ListView dengan simple list item
+        binding.listRekam.adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            teksList
+        )
 
         // Klik item -> DetailActivity
         binding.listRekam.setOnItemClickListener { _, _, position, _ ->
