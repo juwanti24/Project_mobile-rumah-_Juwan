@@ -18,6 +18,19 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    sourceSets {
+        getByName("main") {
+            res.setSrcDirs(
+                listOf(
+                    "src/main/res",
+                    "src/main/res_icons",
+                    "src/main/res_bg",
+                    "src/main/res_images"
+                )
+            )
+        }
+    }
+
     buildTypes {
         release {
             optimization {
