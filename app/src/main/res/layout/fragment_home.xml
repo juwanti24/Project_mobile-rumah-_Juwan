@@ -16,10 +16,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_header"
+            android:background="@drawable/bg_header_wave"
             android:orientation="vertical"
-            android:padding="20dp">
-
+            android:padding="20dp"
+            android:paddingBottom="44dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -188,27 +188,40 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+
         <!-- ===== Layanan Kami ===== -->
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:text="Layanan Kami"
+            android:textColor="@color/deep_teal"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridLayanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="14dp"
+            app:columnCount="2">
 
             <!-- Konsultasi -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnKonsultasi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="6dp"
-                android:layout_weight="1"
+                android:layout_margin="6dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -240,14 +253,14 @@
                 android:id="@+id/btnRekam"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_weight="1"
+                android:layout_margin="6dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -273,19 +286,19 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
             <!-- Artikel (WebView) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/btnArtikel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
+                android:layout_margin="6dp"
                 android:clickable="true"
                 android:focusable="true"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
-                app:cardElevation="3dp">
+                app:cardElevation="3dp"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -311,7 +324,46 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+
+            <!-- Profil -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnProfil"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
+                app:layout_columnWeight="1"
+                app:layout_gravity="fill_horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="Profil"
+                        android:src="@drawable/ic_person"
+                        app:tint="@color/deep_teal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Profil"
+                        android:textColor="@color/deep_teal"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.gridlayout.widget.GridLayout>
 
     </LinearLayout>
 </ScrollView>

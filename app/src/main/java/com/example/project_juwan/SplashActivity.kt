@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
             val tujuan = if (isLogin) BaseActivity::class.java
             else LoginActivity::class.java
 
-            startActivity(Intent(this, tujuan))
+            startActivity(Intent(this, TutorialActivity::class.java))
             finish()
         }, 2500)
     }

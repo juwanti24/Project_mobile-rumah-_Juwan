@@ -52,6 +52,11 @@ class HomeFragment : Fragment() {
         binding.btnRekam.setOnClickListener {
             bottomNav.selectedItemId = R.id.nav_rekam
         }
+        binding.btnProfil.setOnClickListener {
+            requireActivity()
+                .findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_nav_view)
+                .selectedItemId = R.id.nav_profil
+        }
 
         // WebView
         // Tombol Artikel -> halaman WebView
