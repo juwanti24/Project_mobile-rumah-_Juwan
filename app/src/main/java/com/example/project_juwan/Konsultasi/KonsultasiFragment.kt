@@ -16,6 +16,7 @@ class KonsultasiFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var spesialisAktif = "Semua"
+    private lateinit var adapter: DokterAdapter
 
     // Data dummy
     private val daftarDokter = listOf(
@@ -37,7 +38,11 @@ class KonsultasiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tampilkanDaftar()
+        // Adapter dibuat sekali, data awal = semua dokter
+        adapter = DokterAdapter(daftarDokter) { dokter ->
+            tampilDetail(dokter)
+        }
+        binding.rvDokter.adapter = adapter
 
         // Chip filter spesialis
         binding.chipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
@@ -53,18 +58,14 @@ class KonsultasiFragment : Fragment() {
         // Pencarian nama
         binding.etCari.doOnTextChanged { _, _, _, _ -> tampilkanDaftar() }
     }
-
     private fun tampilkanDaftar() {
         val kataKunci = binding.etCari.text.toString().trim()
         val hasil = daftarDokter.filter {
             (spesialisAktif == "Semua" || it.spesialis == spesialisAktif) &&
                     it.nama.contains(kataKunci, ignoreCase = true)
         }
-        binding.listDokter.adapter = DokterAdapter(requireContext(), hasil) { dokter ->
-            tampilDetail(dokter)
-        }
+        adapter.updateData(hasil)
     }
-
     private fun tampilDetail(dokter: Dokter) {
         val builder = MaterialAlertDialogBuilder(requireActivity())
             .setTitle(dokter.nama)

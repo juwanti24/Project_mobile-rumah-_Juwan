@@ -1,31 +1,32 @@
 package com.example.project_juwan.Rekam
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.example.project_juwan.databinding.ItemRekamBinding
+import android.util.Log
 
 class RekamAdapter(
-    context: Context,
-    private val data: List<RekamMedis>
-) : ArrayAdapter<RekamMedis>(context, 0, data) {
+    private val list: List<RekamMedis>,
+    private val onClick: (RekamMedis) -> Unit
+) : RecyclerView.Adapter<RekamAdapter.VH>() {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val binding = if (convertView == null) {
-            ItemRekamBinding.inflate(LayoutInflater.from(context), parent, false)
-        } else {
-            ItemRekamBinding.bind(convertView)
-        }
+    class VH(val b: ItemRekamBinding) : RecyclerView.ViewHolder(b.root)
 
-        val rekam = data[position]
-        binding.imgIkon.setImageResource(rekam.ikon)
-        binding.tvTanggal.text = rekam.tanggal
-        binding.tvJudul.text = rekam.judul
-        binding.tvDokter.text = "${rekam.dokter} · ${rekam.spesialis}"
-        binding.tvCatatan.text = rekam.catatan
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        VH(ItemRekamBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
-        return binding.root
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        val r = list[position]
+        holder.b.tvTanggal.text = r.tanggal
+        holder.b.tvJudul.text = r.judul
+        holder.b.tvDokter.text = r.dokter
+        holder.b.root.setOnClickListener { onClick(r) }
+        Log.d("RekamAdapter", "Bind posisi $position: ${r.judul} - ${r.dokter}")
+    }
+
+    override fun getItemCount(): Int {
+        Log.d("RekamAdapter", "Jumlah data: ${list.size}")
+        return list.size
     }
 }

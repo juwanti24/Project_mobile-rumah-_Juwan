@@ -1,48 +1,58 @@
 package com.example.project_juwan.Konsultasi
 
-import android.content.Context
-import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.example.project_juwan.R
 import com.bumptech.glide.Glide
 import com.example.project_juwan.databinding.ItemDokterBinding
 
 class DokterAdapter(
-    context: Context,
-    private val data: List<Dokter>,
-    private val onDetailClick: (Dokter) -> Unit
-) : ArrayAdapter<Dokter>(context, 0, data) {
+    private var list: List<Dokter>,
+    private val onClick: (Dokter) -> Unit
+) : RecyclerView.Adapter<DokterAdapter.VH>() {
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val binding = if (convertView == null) {
-            ItemDokterBinding.inflate(LayoutInflater.from(context), parent, false)
-        } else {
-            ItemDokterBinding.bind(convertView)
-        }
+    class VH(val b: ItemDokterBinding) : RecyclerView.ViewHolder(b.root)
 
-        val dokter = data[position]
-        binding.tvNama.text = dokter.nama
-        binding.tvSpesialis.text = "Spesialis ${dokter.spesialis}"
-        binding.tvRating.text = "★ ${dokter.rating}/5"
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        VH(ItemDokterBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        val d = list[position]
+        val context = holder.itemView.context
+
+        holder.b.tvNama.text = d.nama
+        holder.b.tvSpesialis.text = "Spesialis ${d.spesialis}"
+        holder.b.tvRating.text = "★ ${d.rating}"
         Glide.with(context)
-            .load(dokter.foto)
+            .load(d.foto)
             .override(200, 200)
             .centerCrop()
-            .into(binding.imgDokter)
+            .into(holder.b.imgDokter)
 
-        if (dokter.tersedia) {
-            binding.tvStatus.text = "● Tersedia"
-            binding.tvStatus.setTextColor(Color.parseColor("#1C8E38"))
+        // Status ketersediaan
+        if (d.tersedia) {
+            holder.b.tvStatus.text = "● Tersedia"
+            holder.b.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.teal_dark))
         } else {
-            binding.tvStatus.text = "● Penuh"
-            binding.tvStatus.setTextColor(Color.GRAY)
+            holder.b.tvStatus.text = "● Penuh"
+            holder.b.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.coral))
         }
 
-        binding.btnDetail.setOnClickListener { onDetailClick(dokter) }
+        // Klik kartu maupun tombol "Lihat Detail"
+        holder.b.root.setOnClickListener { onClick(d) }
+        holder.b.btnDetail.setOnClickListener { onClick(d) }
 
-        return binding.root
+        Log.d("DokterAdapter", "Bind posisi $position: ${d.nama}")
+    }
+
+    override fun getItemCount() = list.size
+
+    // Dipanggil saat chip atau pencarian berubah
+    fun updateData(newList: List<Dokter>) {
+        list = newList
+        notifyDataSetChanged()
     }
 }

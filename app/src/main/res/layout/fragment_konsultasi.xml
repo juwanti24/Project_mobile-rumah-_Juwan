@@ -181,16 +181,13 @@
         android:textColor="@color/deep_teal"
         android:textSize="13sp" />
 
-    <ListView
-        android:id="@+id/listDokter"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDokter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="12dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="16dp" />
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </LinearLayout>

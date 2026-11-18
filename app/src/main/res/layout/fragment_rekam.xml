@@ -92,23 +92,24 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Daftar riwayat (simple list item) -->
-    <com.google.android.material.card.MaterialCardView
+    <!-- Tab: Rekam Medis & Obat -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="16dp"
-        android:layout_weight="1"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="3dp">
+        android:background="@android:color/transparent"
+        app:tabIndicatorColor="@color/coral"
+        app:tabRippleColor="@color/mint_teal"
+        app:tabSelectedTextColor="@color/deep_teal"
+        app:tabTextColor="@color/gray_blue" />
 
-        <ListView
-            android:id="@+id/listRekam"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.card.MaterialCardView>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
