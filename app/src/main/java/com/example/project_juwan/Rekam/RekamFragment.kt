@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import com.example.project_juwan.R
 import com.example.project_juwan.databinding.FragmentRekamBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import androidx.lifecycle.lifecycleScope
+import com.example.project_juwan.data.AppDatabase
+import kotlinx.coroutines.launch
 
 class RekamFragment : Fragment() {
     private var _binding: FragmentRekamBinding? = null
@@ -24,8 +27,6 @@ class RekamFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.tvJumlah.text = "${RekamData.daftarRekam.size} catatan medis"
 
         binding.viewPager.adapter = RekamTabsAdapter(this)
 
@@ -47,6 +48,17 @@ class RekamFragment : Fragment() {
         }.attach()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (_binding != null) muatJumlah()
+    }
+
+    private fun muatJumlah() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val jumlah = AppDatabase.getInstance(requireContext()).bookingDao().getRiwayat().size
+            _binding?.tvJumlah?.text = "$jumlah catatan medis"
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

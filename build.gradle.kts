@@ -1,4 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     alias(libs.plugins.android.application) apply false
+    try {
+        id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+    } catch (e: Exception) {
+        throw e
+    } finally {
+    } apply false
+
 }

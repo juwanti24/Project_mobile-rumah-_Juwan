@@ -1,5 +1,8 @@
 package com.example.project_juwan.Konsultasi
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +10,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.project_juwan.R
+import com.example.project_juwan.data.AppDatabase
 import com.example.project_juwan.databinding.FragmentKonsultasiBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
+import java.util.Calendar
+import java.util.Locale
 
 class KonsultasiFragment : Fragment() {
     private var _binding: FragmentKonsultasiBinding? = null
@@ -38,13 +46,12 @@ class KonsultasiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Adapter dibuat sekali, data awal = semua dokter
+
         adapter = DokterAdapter(daftarDokter) { dokter ->
             tampilDetail(dokter)
         }
         binding.rvDokter.adapter = adapter
 
-        // Chip filter spesialis
         binding.chipGroup.setOnCheckedStateChangeListener { _, checkedIds ->
             spesialisAktif = when (checkedIds.firstOrNull()) {
                 R.id.chipUmum -> "Umum"
@@ -55,9 +62,9 @@ class KonsultasiFragment : Fragment() {
             tampilkanDaftar()
         }
 
-        // Pencarian nama
         binding.etCari.doOnTextChanged { _, _, _, _ -> tampilkanDaftar() }
     }
+
     private fun tampilkanDaftar() {
         val kataKunci = binding.etCari.text.toString().trim()
         val hasil = daftarDokter.filter {
@@ -66,6 +73,7 @@ class KonsultasiFragment : Fragment() {
         }
         adapter.updateData(hasil)
     }
+
     private fun tampilDetail(dokter: Dokter) {
         val builder = MaterialAlertDialogBuilder(requireActivity())
             .setTitle(dokter.nama)
@@ -74,15 +82,17 @@ class KonsultasiFragment : Fragment() {
 
         if (dokter.tersedia) {
             builder.setPositiveButton("Booking Sekarang") { _, _ ->
-                Toast.makeText(
-                    requireContext(),
-                    "Booking dengan ${dokter.nama} berhasil",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val intent = Intent(requireContext(), BookingFormActivity::class.java)
+                intent.putExtra(BookingFormActivity.EXTRA_NAMA, dokter.nama)
+                intent.putExtra(BookingFormActivity.EXTRA_SPESIALIS, dokter.spesialis)
+                startActivity(intent)
             }
         }
         builder.show()
     }
+
+    // Pilih tanggal -> pilih jam -> simpan
+
 
     override fun onDestroyView() {
         super.onDestroyView()

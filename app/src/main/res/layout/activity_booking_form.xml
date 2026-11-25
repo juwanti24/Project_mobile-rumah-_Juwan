@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/warm_white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/deep_teal"
+        app:title="Form Booking"
+        app:titleTextColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Dokter">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDokter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:cursorVisible="false"
+                            android:focusable="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Keluhan">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etKeluhan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:inputType="textMultiLine"
+                            android:minLines="3" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Tanggal">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTanggal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Jam">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etJam"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSimpanBooking"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:text="Simpan Booking"
+                android:textAllCaps="false"
+                app:backgroundTint="@color/coral"
+                app:cornerRadius="26dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

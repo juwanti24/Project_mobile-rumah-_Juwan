@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -55,6 +57,10 @@ dependencies {
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation(libs.androidx.constraintlayout)
+    val roomVersion = "2.8.4"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
     testImplementation(libs.junit)

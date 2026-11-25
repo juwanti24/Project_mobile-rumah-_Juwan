@@ -120,6 +120,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardKonsultasiNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -145,6 +146,7 @@
                     app:cardElevation="0dp">
 
                     <TextView
+                        android:id="@+id/tvTanggalBadge"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -364,6 +366,36 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.gridlayout.widget.GridLayout>
+
+        <!-- ===== Semua Booking ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Semua Booking"
+            android:textColor="@color/deep_teal"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvBookingKosong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="Belum ada booking"
+            android:textColor="@color/soft_teal"
+            android:textSize="13sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="14dp"
+            android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
 </ScrollView>
